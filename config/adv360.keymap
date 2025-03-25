@@ -10,6 +10,7 @@
 #define TAPPING_TERM_MS 280
 
 /*          
+                Kinesis Advantage 360 Key Map
  ╭────────────────────────────┬────────────────────────────╮ 
  │  0   1   2   3   4   5   6 │  7   8   9  10  11  12  13 │ 
  │ 14  15  16  17  18  19  20 │ 21  22  23  24  25  26  27 │ 
@@ -18,9 +19,11 @@
  │ 60  61  62  63  64╭────╯       ╰────╮71  72  73  74  75 │ 
  ╰───────────────────┼────────┬────────┼───────────────────╯
                  ╭───╯ 35  36 │ 37  38 ╰───╮                
+                 │         52 │ 53         │                
                  │ 65  66  67 │ 68  69  70 │                
-                 ╰───────╮ 52 │ 53 ╭───────╯                
-                         ╰────┴────╯                         */
+                 ╰─────────────────────────╯                
+*/
+
 / {
     behaviors {
       #include "macros.dtsi"
@@ -30,8 +33,19 @@
       #define KEYS_R 7 8 9 10 11 12 13 21 22 23 24 25 26 27 39 40 41 42 43 44 45 54 55 56 57 58 59 71 72 73 74 75
       #define THUMBS 35 36 37 38 65 66 67 68 69 70
       
-      /* adding the timerless mod for homerow mods defined by urob */
-      /* left hand home row mods */
+      /* 
+      Timerless Home Row Mod
+
+      the tap hold flavor "balanced" helps ensuring a hold is triggered with another key press and release.
+      require-prior-idle-ms will help mitigate the delay that we see with regular typing by defaulting to 
+      a tap if other keys are pressed within the prior idle window.
+      "positional hold tap" is used to ensure that rolling keys are not an issue.
+      adding hold-trigger-on-release ensures that "positional hold tap" does not interfere with holding
+      multiple modifiers using the same hand.
+      Note - it is recommeded to use the home row mods with modifiers other than shift
+      
+      */
+
       hml: homerow_mods_left {
           compatible = "zmk,behavior-hold-tap";
           label = "HOMEROW_MODS_LEFT";
@@ -45,7 +59,7 @@
           hold-trigger-on-release;
 
       };
-      /* right hand home row mods */
+
       hmr: homerow_mods_right {
           compatible = "zmk,behavior-hold-tap";
           label = "HOMEROW_MODS_RIGHT";
